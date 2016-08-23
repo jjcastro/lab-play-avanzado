@@ -14,6 +14,8 @@ import play.mvc.*;
 import java.util.concurrent.CompletionStage;
 import play.libs.Json;
 import com.fasterxml.jackson.databind.JsonNode;
+
+
 public class ProductController extends Controller {
 
 
@@ -33,13 +35,12 @@ public class ProductController extends Controller {
                         }
                 );
     }
-    public CompletionStage<Result> getProduct(){
+    public CompletionStage<Result> getProduct(Long id){
         MessageDispatcher jdbcDispatcher = AkkaDispatcher.jdbcDispatcher;
-        String nProduct = request().path().toString();
         return CompletableFuture.
                 supplyAsync(
                         () -> {
-                            return ProductEntity.FINDER.all();
+                            return ProductEntity.FINDER.byId(id);
                         }
                         ,jdbcDispatcher)
                 .thenApply(
@@ -49,8 +50,21 @@ public class ProductController extends Controller {
                 );
 
     }
-    public CompletionStage<Result> deleteProduct(){
-        return null;
+    public CompletionStage<Result> deleteProduct(Long id){
+        MessageDispatcher jdbcDispatcher = AkkaDispatcher.jdbcDispatcher;
+
+        ProductEntity product= ProductEntity.FINDER.byId(id);
+        return CompletableFuture.supplyAsync(
+                ()->{
+                    product.delete();
+                    return product;
+                }
+        ).thenApply(
+                productEntity -> {
+                    return ok(Json.toJson(productEntity));
+                }
+        );
+
     }
 
 
@@ -68,6 +82,26 @@ public class ProductController extends Controller {
                     return ok(Json.toJson(productEntity));
                 }
         );
+    }
+
+    public CompletionStage<Result> updateProduct(Long id){
+
+        MessageDispatcher jdbcDispatcher = AkkaDispatcher.jdbcDispatcher;
+        JsonNode nProduct = request().body().asJson();
+        ProductEntity newProduct = Json.fromJson( nProduct , ProductEntity.class ) ;
+        ProductEntity old=ProductEntity.FINDER.byId(id);
+        return CompletableFuture.supplyAsync(
+                ()->{
+                    old.update(newProduct);
+                    old.update();
+                    return old;
+                }
+        ).thenApply(
+                productEntity -> {
+                    return ok(Json.toJson(productEntity));
+                }
+        );
+
     }
 
 

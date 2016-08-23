@@ -16,8 +16,16 @@ GET     /assets/*file               controllers.Assets.versioned(path="/public",
 #ProductController
 
 GET /products                       controllers.ProductController.getProducts
-GET /products/{id}                  controllers.ProductController.getProduct
-
+GET /products/:id                   controllers.ProductController.getProduct(id: Long)
 POST /products                      controllers.ProductController.createProduct
-#UPDATE /products/{id}               controllers.ProductController.updateProduct
-DELETE /products/{id}               controllers.ProductController.deleteProduct
+PUT /products/:id                controllers.ProductController.updateProduct(id: Long)
+DELETE /products/:id                controllers.ProductController.deleteProduct(id: Long)
+
+
+#WishListController
+
+GET /wishlists                      controllers.WishListController.getWishLists
+GET /wishlists/:id                  controllers.WishListController.getWishList(id: Long)
+POST /wishlists                     controllers.WishListController.createWishList
+DELETE /wishlists/:id               controllers.WishListController.deleteWishList(id: Long)
+PUT /wishlists/:id                  controllers.WishListController.updateWishList(id: Long)

@@ -91,6 +91,14 @@ public class ProductEntity extends Model{
         this.available = available;
     }
 
+    public void update(ProductEntity nProductEntity){
+        this.name=nProductEntity.getName();
+        this.stock=nProductEntity.getStock();
+        this.price=nProductEntity.getPrice();
+        this.available=nProductEntity.getAvailable();
+        this.description=nProductEntity.getDescription();
+
+    }
     @Override
     public String toString() {
         return "ProductEntity{" +
