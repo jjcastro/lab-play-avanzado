@@ -59,7 +59,7 @@ public class WishListController extends Controller {
                 ()->{
                     wishList.save();
                     return wishList;
-                }
+                },jdbcDispatcher
         ).thenApply(
                 wishListEntity -> {
                     return ok(Json.toJson(wishListEntity));
@@ -75,7 +75,7 @@ public class WishListController extends Controller {
                     wishList.delete();
 
                     return wishList;
-                }
+                },jdbcDispatcher
         ).thenApply(
                 wishListEntity -> {
                     return ok(Json.toJson(wishListEntity));
@@ -96,7 +96,7 @@ public class WishListController extends Controller {
                     actual.update(newWishList);
                     actual.update();
                     return actual;
-                }
+                },jdbcDispatcher
         ).thenApply(
                 wishListEntity -> {
                     return ok(Json.toJson(wishListEntity));

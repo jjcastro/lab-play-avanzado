@@ -29,3 +29,4 @@ GET /wishlists/:id                  controllers.WishListController.getWishList(i
 POST /wishlists                     controllers.WishListController.createWishList
 DELETE /wishlists/:id               controllers.WishListController.deleteWishList(id: Long)
 PUT /wishlists/:id                  controllers.WishListController.updateWishList(id: Long)
+

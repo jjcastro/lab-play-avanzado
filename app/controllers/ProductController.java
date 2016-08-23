@@ -58,7 +58,7 @@ public class ProductController extends Controller {
                 ()->{
                     product.delete();
                     return product;
-                }
+                },jdbcDispatcher
         ).thenApply(
                 productEntity -> {
                     return ok(Json.toJson(productEntity));
@@ -76,7 +76,7 @@ public class ProductController extends Controller {
                 ()->{
                     product.save();
                     return product;
-                }
+                },jdbcDispatcher
         ).thenApply(
                 productEntity -> {
                     return ok(Json.toJson(productEntity));
@@ -85,6 +85,8 @@ public class ProductController extends Controller {
     }
 
     public CompletionStage<Result> updateProduct(Long id){
+
+
 
         MessageDispatcher jdbcDispatcher = AkkaDispatcher.jdbcDispatcher;
         JsonNode nProduct = request().body().asJson();
@@ -95,7 +97,7 @@ public class ProductController extends Controller {
                     old.update(newProduct);
                     old.update();
                     return old;
-                }
+                },jdbcDispatcher
         ).thenApply(
                 productEntity -> {
                     return ok(Json.toJson(productEntity));
