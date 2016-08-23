@@ -8,7 +8,9 @@ import com.avaje.ebean.Model;
 
 @Entity
 @Table(name = "itementity")
-public class ItemEntity {
+public class ItemEntity extends Model{
+
+    public static Finder<Long,ItemEntity> FINDER = new Finder<>(ItemEntity.class);
 
     @Id
     @GeneratedValue(strategy= GenerationType.SEQUENCE,generator = "Item")
@@ -71,6 +73,13 @@ public class ItemEntity {
     public void setQuantity(int id) {
         this.quantity = id;
     }
+
+    public void update(ItemEntity nItemEntity){
+        this.product_id=nItemEntity.product_id;
+        this.wishlist_id=nItemEntity.wishlist_id;
+        this.quantity=nItemEntity.quantity;
+    }
+
     @Override
     public String toString() {
         return "ItemEntity{" +

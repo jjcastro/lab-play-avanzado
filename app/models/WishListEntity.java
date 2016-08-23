@@ -50,9 +50,9 @@ public class WishListEntity extends Model {
 
 
     public void update(WishListEntity nWishList){
-
-        this.setUsername(nWishList.getUsername());
+        this.username = nWishList.username;
     }
+
     @Override
     public String toString(){
         return "WishListEntity{ " +

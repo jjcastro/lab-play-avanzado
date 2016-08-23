@@ -18,7 +18,7 @@ GET     /assets/*file               controllers.Assets.versioned(path="/public",
 GET /products                       controllers.ProductController.getProducts
 GET /products/:id                   controllers.ProductController.getProduct(id: Long)
 POST /products                      controllers.ProductController.createProduct
-PUT /products/:id                controllers.ProductController.updateProduct(id: Long)
+PUT /products/:id                   controllers.ProductController.updateProduct(id: Long)
 DELETE /products/:id                controllers.ProductController.deleteProduct(id: Long)
 
 
@@ -30,3 +30,10 @@ POST /wishlists                     controllers.WishListController.createWishLis
 DELETE /wishlists/:id               controllers.WishListController.deleteWishList(id: Long)
 PUT /wishlists/:id                  controllers.WishListController.updateWishList(id: Long)
 
+#ItemController
+
+GET /items                          controllers.ItemController.getItems
+GET /items/:id                      controllers.ItemController.getItem(id: Long)
+POST /items                         controllers.ItemController.createItem
+DELETE /items/:id                   controllers.ItemController.deleteItem(id: Long)
+PUT /items/:id                      controllers.ItemController.updateItem(id: Long)
